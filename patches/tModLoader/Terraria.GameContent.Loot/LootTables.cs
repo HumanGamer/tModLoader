@@ -25,9 +25,9 @@ namespace Terraria.GameContent.Loot
 
 			Loot[NPCID.GreenSlime] = new List<LootInfo>()
 			{
-				new LootInfo(ItemID.CrimsonKey, 10),
-				new LootInfo(ItemID.Stinger, -1, new LootQuantity(1, 4)),
-				new LootInfo(ItemID.Acorn, -1, new LootQuantity(2, 6), new LootConditionBiome(LootConditionBiome.EnumBiome.Snow))
+				new LootInfo(ItemID.CrimsonKey, new LootQuantity(1), 10),
+				new LootInfo(ItemID.Stinger, new LootQuantity(0, 4)),
+				new LootInfo(ItemID.Acorn, new LootQuantity(2, 6), new LootConditionBiome(LootConditionBiome.EnumBiome.Corrupt))
 			};
 		}
 
@@ -71,7 +71,8 @@ namespace Terraria.GameContent.Loot
 							? Random.NextInt(info.Quantity.MinQuantity, info.Quantity.MaxQuantity)
 							: Main.rand.Next(info.Quantity.MinQuantity, info.Quantity.MaxQuantity);
 					}
-					Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, info.ItemID, quantity, false, 0, false, false);
+					if (quantity > 0)
+						Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, info.ItemID, quantity, false, 0, false, false);
 				}
 			}
 		}

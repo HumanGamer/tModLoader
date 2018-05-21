@@ -17,19 +17,19 @@ namespace Terraria.GameContent.Loot
 
 		public bool AllowLuckModifier { get; set; }
 
-		public LootInfo(int itemID, int dropChance, LootQuantity quantity, bool allowLuckModifier, params LootCondition[] conditions)
+		public LootInfo(int itemID, LootQuantity quantity, int dropChance, bool allowLuckModifier, params LootCondition[] conditions)
 		{
 			ItemID = itemID;
-			DropChance = dropChance;
 			Quantity = quantity;
+			DropChance = dropChance;
 			AllowLuckModifier = allowLuckModifier;
 			Conditions = conditions.ToList();
 		}
 
-		public LootInfo(int itemID, int dropChance, LootQuantity quantity, params LootCondition[] conditions) : this(itemID, dropChance, quantity, true, conditions) { }
+		public LootInfo(int itemID, LootQuantity quantity, int dropChance, params LootCondition[] conditions) : this(itemID, quantity, dropChance, true, conditions) { }
 
-		public LootInfo(int itemID, int dropChance, params LootCondition[] conditions) : this(itemID, dropChance, new LootQuantity(1), conditions) { }
+		public LootInfo(int itemID, LootQuantity quantity, params LootCondition[] conditions) : this(itemID, quantity, -1, conditions) { }
 
-		public LootInfo(int itemID, params LootCondition[] conditions) : this(itemID, -1, conditions) { }
+		public LootInfo(int itemID, params LootCondition[] conditions) : this(itemID, new LootQuantity(1), conditions) { }
 	}
 }
