@@ -1,5 +1,13 @@
 --- src/Terraria\Terraria\NPC.cs
 +++ src/tModLoader\Terraria\NPC.cs
+@@ -9,6 +_,7 @@
+ using Terraria.GameContent;
+ using Terraria.GameContent.Achievements;
+ using Terraria.GameContent.Events;
++using Terraria.GameContent.Loot;
+ using Terraria.GameContent.Tile_Entities;
+ using Terraria.GameContent.UI;
+ using Terraria.Graphics.Effects;
 @@ -16,11 +_,38 @@
  using Terraria.Localization;
  using Terraria.Utilities;
@@ -520,17 +528,22 @@
  			{
  				return;
  			}
-@@ -59621,6 +_,10 @@
+@@ -59621,7 +_,14 @@
  			{
  				return;
  			}
+-			if ((this.type == 170 || this.type == 180 || this.type == 171) && Main.rand.Next(3) == 0)
 +			if (!NPCLoader.PreNPCLoot(this))
 +  			{
 +  				return;
 +  			}
- 			if ((this.type == 170 || this.type == 180 || this.type == 171) && Main.rand.Next(3) == 0)
++
++			LootTables.DropLoot(this);
++
++			/*if ((this.type == 170 || this.type == 180 || this.type == 171) && Main.rand.Next(3) == 0)
  			{
  				Item.NewItem((int)this.position.X, (int)this.position.Y, this.width, this.height, 3532, 1, false, 0, false, false);
+ 			}
 @@ -59737,7 +_,7 @@
  			if (this.type == 1 && this.ai[1] > 0f)
  			{
@@ -556,6 +569,16 @@
  			if (this.type != 16 && this.type != 81 && this.type != 121 && Main.rand.Next(6) == 0 && this.lifeMax > 1 && this.damage > 0)
  			{
  				int num77 = (int)Player.FindClosest(this.position, this.width, this.height);
+@@ -63193,7 +_,8 @@
+ 				{
+ 					Item.NewItem((int)this.position.X, (int)this.position.Y, this.width, this.height, 184, 1, false, 0, false, false);
+ 				}
+-			}
++			}*/
++
+ 			float num79 = this.value;
+ 			if (this.midas)
+ 			{
 @@ -63380,6 +_,7 @@
  			{
  				itemType = 3860;
